@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.notif{
+    /* border: 5px solid black; */
+    width: 250px;
+    background-color: green;
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: none;
+    font-size: 1.5rem;
+    padding: 0px 8px;
+}
+.block{
+    display: block;
+}
+
