@@ -16,14 +16,19 @@ passport.use(new googleStrategy({
             console.log(err);
             return;
         }
-        console.log(profile);
+        // console.log(profile);
         if(user){
+            if(!user.avatar){
+                user.avatar = profile.photos[0].value
+                user.save();
+            }
             return done(null, user);
         }else{
             User.create({
                 email: profile.emails[0].value,
                 name: profile.displayName,
-                password: crypto.randomBytes(20).toString('hex')
+                password: crypto.randomBytes(20).toString('hex'),
+                avatar: profile.photos[0].value
             }, (err, user) => {
                 if(err){
                     console.log("GOOGLE USER CREATION ERROR");

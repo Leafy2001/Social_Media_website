@@ -1,6 +1,7 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 const Like = require('../models/like');
+const comments_mailer = require('../mailers/comments_mailer');
 
 module.exports.createComment = async (req, res) => {
     try{
@@ -14,9 +15,12 @@ module.exports.createComment = async (req, res) => {
             post: post_id,
             user: user
         });
+        comment = await comment.populate('user', 'name email').execPopulate();
 
         await post.comments.push(comment);
         await post.save();
+
+        await comments_mailer.newComment(comment);
 
         req.flash('success', 'Comment Successfully Added');
         return res.redirect('/');
