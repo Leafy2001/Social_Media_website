@@ -9,7 +9,12 @@ module.exports.home = async function(req, res){
                         .populate('user', 'name')
                         .populate({
                             path: 'comments',
-                            select: 'user content likes',
+                            select: 'user content likes createdAt',
+                            options: {
+                                sort:{
+                                    createdAt: -1
+                                }
+                            },
                             populate: {
                                 path: 'user',
                                 select: 'name'

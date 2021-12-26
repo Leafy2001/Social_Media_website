@@ -22,6 +22,15 @@ module.exports.createComment = async (req, res) => {
 
         await comments_mailer.newComment(comment);
 
+        if(req.xhr){
+            return res.status(200).json({
+                message: "COMMENT ADDED",
+                data: {
+                    comment: comment
+                }
+            })
+        }
+
         req.flash('success', 'Comment Successfully Added');
         return res.redirect('/');
     }catch(err){
