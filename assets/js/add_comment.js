@@ -15,8 +15,9 @@
                     let btn = $(' .delete-comment', dom);
                     deleteComment(btn);
                     $(`#post-comments-${post_id}`).prepend(dom);
-                    
-                    toggle_like();
+                    let like_btn = $(' .toggle_like', dom);
+                    attach(like_btn);
+                    // toggle_like();
                     new Noty({
                         theme: 'relax',
                         text: data.message,

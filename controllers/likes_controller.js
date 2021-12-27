@@ -8,11 +8,11 @@ module.exports.toggle = async (req, res) => {
     try{
         let likeable;
         let deleted = false;
-        if(req.query.type === 'Post'){
+        if(req.query.type == 'Post'){
             likeable = await Post.findById(req.query.id)
                             .populate('likes');
 
-        }else if(req.query.type === 'Comment'){
+        }else if(req.query.type == 'Comment'){
             likeable = await Comment.findById(req.query.id)
                             .populate('likes');
         }else{

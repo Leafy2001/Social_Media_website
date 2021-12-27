@@ -20,7 +20,7 @@ module.exports.createComment = async (req, res) => {
         await post.comments.push(comment);
         await post.save();
 
-        await comments_mailer.newComment(comment);
+        // await comments_mailer.newComment(comment);
 
         if(req.xhr){
             return res.status(200).json({

@@ -16,7 +16,12 @@
                     let btn = $(' .delete-post-button', dom);
                     deletePost(btn);
                     add_comment();
-                    toggle_like();
+                    
+                    let like_btn = $(' .toggle_like', dom);
+                    console.log(like_btn);
+                    // toggle_like();
+                    attach(like_btn);
+
                     new Noty({
                         theme: 'relax',
                         text: data.message,
@@ -54,7 +59,7 @@
                             <a class = "delete-post-button" href="/posts/destroy/${post_id}">X</a>
                         </p>
                         <span class="likes_count">0</span> Likes | 
-                        <a href = "/likes/toggle?id=${post_id}&type=Post" class = "toggle_like">Like</a>
+                        <a href = "/likes/toggle?id=${post_id}&type=Post" class="toggle_like">Like</a>
 
                         <div class="post-comments">
                             <form action = "/comments/create" method = "post" id = "new-comment-form">
