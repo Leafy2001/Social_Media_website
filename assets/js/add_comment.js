@@ -15,6 +15,8 @@
                     let btn = $(' .delete-comment', dom);
                     deleteComment(btn);
                     $(`#post-comments-${post_id}`).prepend(dom);
+                    
+                    toggle_like();
                     new Noty({
                         theme: 'relax',
                         text: data.message,
@@ -51,9 +53,9 @@
                 <small>| ${user_name}</small>
                 <a href="/comments/destroy/${comment_id}" class = "delete-comment">X</a>
                 </p>
-                0 Likes 
+                <span class="likes_count">0</span> Likes 
                     | 
-                <a href = "/likes/toggle?id=${comment_id}&type=Comment">Like</a>
+                <a href = "/likes/toggle?id=${comment_id}&type=Comment" class = "toggle_like">Like</a>
             </li>
         `);
 

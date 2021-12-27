@@ -16,6 +16,7 @@
                     let btn = $(' .delete-post-button', dom);
                     deletePost(btn);
                     add_comment();
+                    toggle_like();
                     new Noty({
                         theme: 'relax',
                         text: data.message,
@@ -52,8 +53,8 @@
                             <small>by: ${post_username}</small>
                             <a class = "delete-post-button" href="/posts/destroy/${post_id}">X</a>
                         </p>
-                        ${post.likes.length} Likes | 
-                        <a href = "/likes/toggle?id=${post_id}&type=Post">Like</a>
+                        <span class="likes_count">0</span> Likes | 
+                        <a href = "/likes/toggle?id=${post_id}&type=Post" class = "toggle_like">Like</a>
 
                         <div class="post-comments">
                             <form action = "/comments/create" method = "post" id = "new-comment-form">
@@ -96,7 +97,7 @@
                     // display_notification(true, data.message);
                 },
                 error: (err) => {
-                    console.log(err.responseText);
+                    // console.log(err.responseText);
                     new Noty({
                         theme: 'relax',
                         text: "Could not perform action",

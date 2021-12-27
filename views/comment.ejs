@@ -19,10 +19,10 @@
             <a href="/comments/destroy/<%= comment.id %>" class = "delete-comment">X</a>
             <% } %>
             </p>
-            <%= comment.likes.length %> Likes 
+            <span class="likes_count"><%= comment.likes.length %></span> Likes 
             <% if(locals.user){ %>
                 | 
-            <a href = "/likes/toggle?id=<%=comment.id%>&type=Comment">Like</a>
+            <a href = "/likes/toggle?id=<%=comment.id%>&type=Comment" class = "toggle_like">Like</a>
             <% } %>
         </li>
     <% } %>

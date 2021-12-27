@@ -10,10 +10,10 @@
                     <a class = "delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
                 <% } %>
             </p>
-            <%= post.likes.length %> Likes 
+            <span class = "likes_count"><%= post.likes.length %> </span>Likes 
             <% if(locals.user){ %>
                 | 
-            <a href = "/likes/toggle?id=<%=post.id%>&type=Post">Like</a>
+            <a href = "/likes/toggle?id=<%=post.id%>&type=Post" class = "toggle_like">Like</a>
             <% } %>
             
             

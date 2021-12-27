@@ -32,6 +32,19 @@ module.exports.toggle = async (req, res) => {
             await like.remove();
             await likeable.save();
             deleted = true;
+
+            if(req.xhr){
+                return res.status(200).json({
+                    data:{
+                        deleted: deleted,
+                        model: req.query.type,
+                        likeable: req.query.id,
+                        count: likeable.likes.length
+                    },
+                    message: "LIKE REMOVED"
+                });
+            }
+
             req.flash('success', 'Like Removed');
             return res.redirect('/');
         }else{
@@ -42,16 +55,21 @@ module.exports.toggle = async (req, res) => {
             });
             await likeable.likes.push(newLike.id);
             await likeable.save();
-
+            
+            if(req.xhr){
+                return res.status(200).json({
+                    data:{
+                        deleted: deleted,
+                        model: req.query.type,
+                        likeable: req.query.id,
+                        count: likeable.likes.length
+                    },
+                    message: "LIKE ADDED"
+                });
+            }
+            
             req.flash('success', 'Like Added');
             return res.redirect('/');
-
-            // return res.status(400).json({
-            //     messgae: "Like Successfully Added",
-            //     data:{
-            //         deleted: deleted
-            //     }
-            // });
         }
 
     }catch(err){
