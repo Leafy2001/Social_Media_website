@@ -63,7 +63,15 @@ module.exports.destroy = async (req, res) => {
             await post.comments.splice(index, 1);
             await post.save();
         }
-        
+        if(req.xhr){
+            return res.status(200).json({
+                message: "COMMENT DELETED",
+                data: {
+                    comment_id: c_id
+                }
+            })
+        }
+
         req.flash('success', 'Comment Successfully Deleted');
         return res.redirect('/');
     }catch(err){
