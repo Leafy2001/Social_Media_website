@@ -15,6 +15,7 @@
                     // display_notification(true, data.message);
                     let btn = $(' .delete-post-button', dom);
                     deletePost(btn);
+                    add_comment();
                     new Noty({
                         theme: 'relax',
                         text: data.message,
@@ -55,7 +56,7 @@
                         <a href = "/likes/toggle?id=${post_id}&type=Post">Like</a>
 
                         <div class="post-comments">
-                            <form action = "/comments/create" method = "post">
+                            <form action = "/comments/create" method = "post" id = "new-comment-form">
                                 <input type="text" name="content" placeholder="Type Here to add comment...">
                                 <input type="hidden" name="post" value = "${post_id}">
                                 <input type="submit" value="Post Comment">
