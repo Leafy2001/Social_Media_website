@@ -1,22 +1,19 @@
 body{
     margin: 0;
-    text-align: center;
     overflow-x: hidden;
 }
 
-.notif{
-    /* border: 5px solid black; */
-    width: 250px;
-    background-color: green;
-    color: white;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    display: none;
-    font-size: 1.5rem;
-    padding: 0px 8px;
-}
-.block{
-    display: block;
+
+.navbar{
+    padding-left: 10%;
 }
 
+.login-form{
+    max-width: 600px;
+    margin-top: 30px;
+}
+
+.social-links{
+    font-size: 3rem;
+    margin-top: 10px;
+}
