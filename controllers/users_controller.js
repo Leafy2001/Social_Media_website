@@ -52,10 +52,12 @@ module.exports.create = (req, res) => {
             return res.redirect('back');
         }
         if(!user){
+            const AVATAR_PATH = '/uploads/users/avatars/default.png';
             User.create({
                 email: email,
                 password: pass,
-                name: name
+                name: name,
+                avatar : AVATAR_PATH
             }, (err, user) => {
                 if(err){console.log(err); return;}
             });
@@ -87,8 +89,9 @@ module.exports.update = async (req, res) => {
         let user = await User.findById(req.user.id);
         const AVATAR_PATH = path.join('/uploads/users/avatars');
         
-        user.name = req.body.name;
-        user.email = req.body.email;
+        if(req.body.name.length > 0){
+            user.name = req.body.name;
+        }
         if(req.file){
             console.log(req.file);
             if(user.avatar && fs.existsSync(path.join(__dirname, '..', user.avatar))){

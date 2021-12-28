@@ -1,5 +1,5 @@
         <link rel="stylesheet" href="/css/user_profile.css">
-        <h1>
+        <!-- <h1>
             Codeial / Profile Page
         </h1>
         <br>
@@ -18,4 +18,63 @@
             <input type="file" name="avatar" placeholder="Add profile picture">
             <button type="submit">Update</button>
         </form>
-        <% } %>
+        <% } %> -->
+
+        <div class="container mt-5 details">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-7">
+                    <div class="card p-3 py-4">
+                        <% if(locals.curr_user.avatar){ %>
+                        <div class="text-center"> <img src="<%= locals.curr_user.avatar %>" width="100" class="rounded-circle"> </div>
+                        <% }else{ %>
+                        <div class="text-center"> <img src="/images/default.png" width="100" class="rounded-circle"> </div>
+                        <% } %>
+                            <div class="text-center mt-3"> 
+                            <!-- <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span> -->
+                            <h1 class="mt-2 mb-0"><%= locals.curr_user.name %></h1> 
+                            <span><%= locals.curr_user.email %></span>
+                            <div class="px-4 mt-1">
+                                <p class="fonts">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            </div>
+                            <ul class="social-list">
+                                <li><i class="fab fa-facebook"></i></li>
+                                <li><i class="fab fa-instagram"></i></li>
+                                <li><i class="fab fa-linkedin"></i></li>
+                            </ul>
+                            <% if(locals.user && locals.user.id !== locals.curr_user.id){ %>
+                            <div class="buttons"> 
+                                <!-- <button class="btn btn-outline-primary px-4">Message</button>  -->
+                                <button class="btn btn-primary px-4 ms-3">Follow</button> 
+                            </div>
+                            <% } %>
+                        </div>
+                        <% if(locals.user && locals.user.id === locals.curr_user.id){ %>
+                            <!-- <h2>Update Details</h2>
+                            <form action="/users/update" method="post" enctype="multipart/form-data">
+                                <input type="text" name = "name" value = "<%= locals.user.name %>"/>
+                                <input type="file" name="avatar" placeholder="Add profile picture">
+                                <button type="submit">Update</button>
+                            </form> -->
+                            <div class="update">
+                                <h3>Update Details</h3>
+                                <form action="/users/update" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="exampleInputName" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="exampleInputName" name = "name" value = "<%= locals.user.name %>">
+                                    </div>
+                                    <!-- <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    </div> -->
+                                    <div class="mb-3">
+                                        <label for="exampleInputImage" class="form-label">Profile Picture</label>
+                                        <input type="file" class="form-control" id="exampleInputImage" name = "avatar">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>

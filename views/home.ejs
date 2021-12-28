@@ -1,29 +1,42 @@
-<h1>
-    <%= title %>
-</h1>
+<div class="container main">
+    <div class="row">
+        <div id="feed-posts" class="col-lg-8 col-md-8 posts">
+            <!-- <h2>What's on your mind ....</h2> -->
+            <% if(locals.user) { %>
+            <!-- <form action = "/posts/create" id = "new-post-form" method = "post">
+                <textarea name="content" cols="30" rows="5" placeholder="Type Here..."></textarea>
+                <input type="submit" value="Post">
+            </form> -->
+            <form action = "/posts/create" id = "new-post-form" method = "post">
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"><h4>What's on you mind ? ...</h4></label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">POST</button>
+            </form>
+            <% } %>
 
+            <%- include('post') %>
+        </div>
 
-
-<section id="feed-posts">
-    <h1>Posts</h1>
-    <% if(locals.user) { %>
-    <form action = "/posts/create" id = "new-post-form" method = "post">
-        <textarea name="content" cols="30" rows="5" placeholder="Type Here..."></textarea>
-        <input type="submit" value="Post">
-    </form>
-    <% } %>
-
-    <% if(locals.user){ %>
-    <!-- <h3>USERS</h3>
-    <ul>
-        <% for(let us of all_users){ %>
-            <li><a href = "/users/profile/<%= us.id %>"><%= us.name %></a></li>
-        <% } %>
-    </ul> -->
-    <% } %>
-
-    <%- include('post') %>
-</section>
+        <div class="col-lg-4 col-md-4 d-sm-none d-md-block">
+            <h3>Top Creators</h3>
+            <div class="list-group users_list">
+                <% for(let us of all_users){ %>
+                <a href="/users/profile/<%= us.id %>" class="list-group-item list-group-item-action">
+                    <img class="rounded-circle" alt="profile_pic" src="<%= us.avatar %>" width="50">
+                    <%= us.name %>
+                </a>
+                <% } %>
+            </div>
+            <!-- <ul>
+                <% for(let us of all_users){ %>
+                    <li><a href = "/users/profile/<%= us.id %>"><%= us.name %></a></li>
+                <% } %>
+            </ul> -->
+        </div>
+    </div>
+</div>
 
 <script src = "/js/toggle_likes.js"></script>
 <script src = "/js/add_comment.js"></script>

@@ -3,9 +3,17 @@ body{
     overflow-x: hidden;
 }
 
+.main{
+    margin-top: 5vh;
+}
+
+.posts{
+    padding-right: 100px;
+    padding-left: 25px;
+}
 
 .navbar{
-    padding-left: 10%;
+    padding-left: 5%;
 }
 
 .login-form{
@@ -16,4 +24,11 @@ body{
 .social-links{
     font-size: 3rem;
     margin-top: 10px;
+}
+
+.users_list{
+    margin-top: 3vh;
+}
+.users_list img{
+    margin-right: 10px;
 }
