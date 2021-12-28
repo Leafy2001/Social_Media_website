@@ -42,7 +42,7 @@ router.post('/create', usersConrtoller.create);
 router.post('/createSession', 
     passport.authenticate(
         'local',
-        {failureRedirect: 'users/signin'}
+        {failureRedirect: '/users/signin'}
     )
     ,usersConrtoller.createSession);
 

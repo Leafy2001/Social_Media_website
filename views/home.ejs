@@ -1,6 +1,6 @@
 <div class="container main">
     <div class="row">
-        <div id="feed-posts" class="col-lg-8 col-md-8 posts">
+        <div id="feed-posts" class="col-lg-8 col-md-7 col-sm-11 col-xs-11 posts">
             <!-- <h2>What's on your mind ....</h2> -->
             <% if(locals.user) { %>
             <!-- <form action = "/posts/create" id = "new-post-form" method = "post">
@@ -19,7 +19,7 @@
             <%- include('post') %>
         </div>
 
-        <div class="col-lg-4 col-md-4 d-sm-none d-md-block">
+        <div class="col-lg-4 col-md-5 d-none d-md-block d-xl-block d-xxl-block">
             <h3>Top Creators</h3>
             <div class="list-group users_list">
                 <% for(let us of all_users){ %>

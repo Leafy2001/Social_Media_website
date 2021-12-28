@@ -42,6 +42,7 @@ module.exports.create = (req, res) => {
     let cp = req.body.c_p;
     
     if(pass != cp){
+        req.flash('error', 'Password and Confirm Password do not match.');
         return res.redirect('back');
     }
     User.findOne({
@@ -49,6 +50,7 @@ module.exports.create = (req, res) => {
     }, (err, user) => {
         if(err){
             console.log("ERROR");
+            req.flash('error', 'Internal Server Error');
             return res.redirect('back');
         }
         if(!user){
@@ -59,8 +61,10 @@ module.exports.create = (req, res) => {
                 name: name,
                 avatar : AVATAR_PATH
             }, (err, user) => {
+                req.flash('error', 'Internal Server Error');
                 if(err){console.log(err); return;}
             });
+            req.flash('success', 'User Successfully Signed up');
             return res.redirect('/users/signin');
         }
         req.flash('error', 'User Already Exists');

@@ -15,7 +15,7 @@ passport.use(new localStrategy({
 
             if(!user || user.password !== password){
                 console.log("Invalid Username/Password");
-                return done(null, fasle);
+                return done(null, false);
             }
 
             return done(null, user);
