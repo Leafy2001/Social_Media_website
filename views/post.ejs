@@ -1,27 +1,36 @@
-<br>
-<h2>Recent Activity...</h2>
-<ul id = "post-list-container">
-    <% for (post of locals.posts){ %>
-        <li id = "post-<%= post._id %>">
-            <hr/>
-            <p>
-                <b><%= post.content %></b> | 
-                <small>by: <%= post.user.name %></small>
-                
-                <% if(locals.user && locals.user.id == post.user.id){ %>
-                    <a class = "delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
-                <% } %>
-            </p>
-            <span class = "likes_count"><%= post.likes.length %> </span>Likes 
-            <% if(locals.user){ %>
-                | 
-            <a href = "/likes/toggle?id=<%=post.id%>&type=Post" class = "toggle_like">Like</a>
-            <% } %>
-            
-            
-            <%- include('comment') %>
+<link rel="stylesheet" href="/css/post.css">
 
-            <hr/>
+<h2>Recent Activity...</h2>
+<ul id = "post-list-container" class="list-group list-group-flush">
+    <% for (post of locals.posts){ %>
+        <li id = "post-<%= post._id %>" class="list-group-item single_post">
+            <div class="post_heading">
+                <div class="profile-pic">
+                    <a href = "/users/profile/<%= post.user.id %>"><img src="<%= post.user.avatar %>" class = "post-user-pic rounded-circle" width="45px"></a>
+                </div>
+                <div class="user_info">
+                    <a class="user_name" href="/users/profile/<%= post.user.id %>"><%= post.user.name %></a>
+                    <small class="post_date"><%= post.createdAt.toDateString() %></small>
+                    <% if(locals.user && locals.user.id == post.user.id){ %>
+                        <a class = "delete-post-button" href="/posts/destroy/<%= post.id %>"><i class="fas fa-trash-alt"></i></a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="post_body">
+                <div class="post_content col-lg-10 col-md-12">
+                    <b><%= post.content %></b>
+                </div>
+                <div class="likes_container">
+                    <span class = "likes_count"><%= post.likes.length %> </span>    
+                    <% if(locals.user){ %> 
+                        <a href = "/likes/toggle?id=<%=post.id%>&type=Post" class = "toggle_like"><i class="far fa-thumbs-up"></i> </a>
+                    <% }else{ %>
+                        <i class="far fa-thumbs-up"></i> 
+                    <% } %>
+                </div>
+                
+                <%- include('comment') %>
+            </div>
         </li>
     <% } %>
 </ul>

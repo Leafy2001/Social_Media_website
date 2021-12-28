@@ -1,0 +1,73 @@
+.posts{
+    padding-right: 50px;
+    padding-left: 25px;
+}
+#new-post-form{
+    margin-bottom: 5vh;
+}
+.post_button{
+    font-size: 2rem;
+}
+.post_button:hover{
+    animation: rubberBand;
+    animation-duration: 1s;
+}
+.single_post{
+    padding-bottom: 3vh;
+    padding-top: 3vh;
+}
+
+.post_heading{
+    border-bottom: 1px solid rgb(211, 205, 205);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.profile-pic{
+    margin-right: 15px;
+}
+
+.user_name{
+    font-size: 1.25rem;
+    margin-bottom: 0px;
+    font-weight: 600;
+    display: block;
+    text-decoration: none;
+}
+
+.delete-post-button{
+    position: absolute;
+    color: rgb(199, 42, 42);
+    right: 25px;
+    font-size: 1.5rem;
+}
+
+.delete-post-button:hover{
+    color: rgb(199, 42, 42);
+    animation: wobble;
+    animation-duration: 1s;
+}
+
+.post_content{
+    border: 1px solid black;
+    border-radius: 10px;
+    min-height: 15vh;
+    padding: 15px 40px 25px 15px;
+    background-color: #eff5f8;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.likes_container{
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.toggle_like i:hover{
+    font-size: 2rem;
+    animation: heartBeat;
+    animation-duration: 1s;
+}
