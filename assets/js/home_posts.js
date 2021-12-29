@@ -10,16 +10,19 @@
                 url: '/posts/create',
                 data: form.serialize(),
                 success: (data) => {
+                    let post = data.data.post;
+                    let post_id = post._id;
+                    
                     let dom = get_dom(data);
                     $('#post-list-container').prepend(dom);
                     // display_notification(true, data.message);
                     let btn = $(' .delete-post-button', dom);
                     deletePost(btn);
-                    add_comment();
-                    
+
+                    let comment_form = $(` .new-comment-form`, dom);
+                    add_comment(comment_form);
+
                     let like_btn = $(' .toggle_like', dom);
-                    console.log(like_btn);
-                    // toggle_like();
                     attach(like_btn);
 
                     new Noty({
@@ -46,36 +49,58 @@
     }
 
     function get_dom(data){
+        // console.log(data);
         let post = data.data.post;
         let post_id = post._id;
         let post_content = post.content;
-        let post_username = data.data.user_name;
-        return $(`
-                    <li id = "post-${post_id}">
-                        <hr/>
-                        <p>
-                            <b>${post_content}</b> | 
-                            <small>by: ${post_username}</small>
-                            <a class = "delete-post-button" href="/posts/destroy/${post_id}">X</a>
-                        </p>
-                        <span class="likes_count">0</span> Likes | 
-                        <a href = "/likes/toggle?id=${post_id}&type=Post" class="toggle_like">Like</a>
+        let createdAt = post.createdAt;
 
-                        <div class="post-comments">
-                            <form action = "/comments/create" method = "post" id = "new-comment-form">
-                                <input type="text" name="content" placeholder="Type Here to add comment...">
-                                <input type="hidden" name="post" value = "${post_id}">
-                                <input type="submit" value="Post Comment">
-                            </form>
+        let user = data.data.user;
+        let user_id = user._id;
+        let user_avatar = user.avatar;
+        let user_name = user.name;
+        
+        let dom2 = $(`
+                    <li id = "post-${post_id}" class="list-group-item single_post">
+                    <div class="post_heading">
+                        <div class="profile-pic">
+                            <a href = "/users/profile/${user_id}"><img src="${user_avatar}" class = "post-user-pic rounded-circle" width="45px"></a>
                         </div>
+                        <div class="user_info">
+                            <a class="user_name" href="/users/profile/${user_id}">${user_name}</a>
+                            <small class="post_date">${createdAt}</small>
+                            <a class = "delete-post-button" href="/posts/destroy/${post_id}"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                    <div class="post_body">
+                        <div class="post_content col-lg-10 col-md-12">
+                            <b>${post_content}</b>
+                        </div>
+                        <div class="likes_container">
+                            <span class = "likes_count">0 </span>
+                            <a href = "/likes/toggle?id=${post_id}&type=Post" class = "toggle_like"><i class="far fa-thumbs-up"></i> </a>
+                        </div>
+
+                        <div class="post-comments-form">
+                                <form class="new-comment-form comments-form-${post_id}" action = "/comments/create" method = "post">
+                                    <input type="hidden" name="post" value = "${post_id}">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Add Comment..." name="content"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary add_comment_button"><i class="fas fa-plus-square"></i> Add Comment</button>
+                                </form>
+                        </div>
+
                         <div class="post-comments-list">
                             <ul id="post-comments-${post_id}">
                             
                             </ul>
                         </div>
-                        <hr/>
-                    </li>
-                    `);
+                    </div>
+                </li>
+        `);
+
+        return dom2;
     }
 
     create_post();

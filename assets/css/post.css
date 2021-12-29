@@ -67,9 +67,9 @@
 }
 
 .toggle_like i:hover{
-    font-size: 2rem;
+    /* font-size: 2rem; */
     animation: heartBeat;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
 }
 
 .post-comments-form{

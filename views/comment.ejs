@@ -1,7 +1,7 @@
 <link rel = "stylesheet" href="/css/comment.css">
-<div class="post-comments-form">
+<div class="post-comments-form comments-form-<%= post._id %>">
     <% if(locals.user){ %>
-        <form id="new-comment-form" action = "/comments/create" method = "post">
+        <form class="new-comment-form" action = "/comments/create" method = "post">
             <input type="hidden" name="post" value = "<%= post._id %>">
             <div class="form-group">
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Add Comment..." name="content"></textarea>

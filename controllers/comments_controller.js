@@ -1,6 +1,7 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 const Like = require('../models/like');
+const User = require('../models/user');
 const comments_mailer = require('../mailers/comments_mailer');
 
 module.exports.createComment = async (req, res) => {
@@ -20,13 +21,16 @@ module.exports.createComment = async (req, res) => {
         await post.comments.push(comment);
         await post.save();
 
+        let comment_user = await User.findById(req.user.id).select('name avatar');
+
         // await comments_mailer.newComment(comment);
 
         if(req.xhr){
             return res.status(200).json({
                 message: "COMMENT ADDED",
                 data: {
-                    comment: comment
+                    comment: comment,
+                    user: comment_user
                 }
             })
         }
@@ -34,13 +38,13 @@ module.exports.createComment = async (req, res) => {
         req.flash('success', 'Comment Successfully Added');
         return res.redirect('/');
     }catch(err){
+        console.log("ERROR IN COMMENTS CONTROLLER", err);
         if(req.xhr){
             return res.status(400).json({
                 message: "COMMENT NOT ADDED"
             });
         }
         req.flash('error', 'Comment Not Added');
-        console.log("ERROR IN COMMENTS CONTROLLER", err);
         return res.redirect('/');
     }
 };
