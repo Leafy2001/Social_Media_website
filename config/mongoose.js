@@ -6,7 +6,12 @@ mongoose.connect('mongodb+srv://shashank_1234:dellinspiron@cluster0.qmcyz.mongod
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
- });
+ }).then(() => {
+    console.log("Connected to Database");
+    }).catch((err) => {
+        console.log("Not Connected to Database ERROR! ", err);
+    });
+    
 // mongoose.connect(process.env.MONGODB_URI)
 
 const db = mongoose.connection;
