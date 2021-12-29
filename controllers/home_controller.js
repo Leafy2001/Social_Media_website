@@ -17,7 +17,7 @@ module.exports.home = async function(req, res){
                             },
                             populate: {
                                 path: 'user',
-                                select: 'name'
+                                select: 'name avatar'
                             }
                         });
         

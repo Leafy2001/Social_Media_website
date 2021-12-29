@@ -27,10 +27,10 @@
                     }).show();
                 }, 
                 error: (err) => {
-                    console.log(err.responseText);
+                    // console.log(err.responseText);
                     new Noty({
                         theme: 'relax',
-                        text: data.message,
+                        text: "Comment Not Added",
                         type: 'error',
                         layout: 'topRight',
                         timeout: 1500

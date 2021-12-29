@@ -34,7 +34,13 @@ module.exports.createComment = async (req, res) => {
         req.flash('success', 'Comment Successfully Added');
         return res.redirect('/');
     }catch(err){
-        console.log(err);
+        if(req.xhr){
+            return res.status(400).json({
+                message: "COMMENT NOT ADDED"
+            });
+        }
+        req.flash('error', 'Comment Not Added');
+        console.log("ERROR IN COMMENTS CONTROLLER", err);
         return res.redirect('/');
     }
 };
@@ -43,6 +49,8 @@ module.exports.destroy = async (req, res) => {
     try{
         let c_id = req.params.comment_id;
         let user_id = req.user.id;
+
+        // console.log(c_id);
 
         let comment = await Comment.findById(c_id);
         if(comment.user != user_id){

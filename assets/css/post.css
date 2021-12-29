@@ -52,7 +52,7 @@
 }
 
 .post_content{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 10px;
     min-height: 15vh;
     padding: 15px 40px 25px 15px;
@@ -70,4 +70,34 @@
     font-size: 2rem;
     animation: heartBeat;
     animation-duration: 1s;
+}
+
+.post-comments-form{
+    width: 75%;
+    margin-left: 80px;
+    /* border: 1px solid black; */
+}
+.post-comments-form .add_comment_button{
+    margin-top: 1vh;
+    background-color: #228B22;
+    border-color: #228B22;
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.post-comments-form .add_comment_button i{
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.post-comments-list{
+    margin-left: 80px;
+    width: 75%;
+    /* border: 1px solid black; */
+}
+
+.post-comments-list ul{
+    padding-left: 0px;
+    border: none;
 }

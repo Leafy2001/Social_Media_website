@@ -1,9 +1,12 @@
-<div class="post-comments">
+<link rel = "stylesheet" href="/css/comment.css">
+<div class="post-comments-form">
     <% if(locals.user){ %>
         <form id="new-comment-form" action = "/comments/create" method = "post">
-            <input type="text" name="content" placeholder="Type Here to add comment...">
             <input type="hidden" name="post" value = "<%= post._id %>">
-            <input type="submit" value="Post Comment">
+            <div class="form-group">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Add Comment..." name="content"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary add_comment_button"><i class="fas fa-plus-square"></i> Add Comment</button>
         </form>
     <% } %>
 </div>
@@ -11,19 +14,34 @@
 <div class="post-comments-list">
     <ul id="post-comments-<%= post._id %>">
     <% for(comment of post.comments){ %>
-        <li id = "comment-<%= comment._id %>">
-            <p>
-            <small><b><%= comment.content %></b></small>
-            <small>| <%= comment.user.name %></small>
-            <% if(locals.user && locals.user.id === comment.user.id){ %>
-            <a href="/comments/destroy/<%= comment.id %>" class = "delete-comment">X</a>
-            <% } %>
-            </p>
-            <span class="likes_count"><%= comment.likes.length %></span> Likes 
-            <% if(locals.user){ %>
-                | 
-            <a href = "/likes/toggle?id=<%=comment.id%>&type=Comment" class = "toggle_like">Like</a>
-            <% } %>
+        <li id = "comment-<%= comment._id %>" class="list-group-item single_comment">
+            
+            <div class="comment_heading">
+                <div class="profile-pic-comment">
+                    <a href = "/users/profile/<%= comment.user.id %>"><img src="<%= comment.user.avatar %>" class = "post-user-pic rounded-circle" width="30px"></a>
+                </div>
+                <div class="comment_user_info">
+                    <a class="comment_user_name" href="/users/profile/<%= comment.user.id %>"><%= comment.user.name %></a>
+                    <small class="comment_date"><%= comment.createdAt.toDateString() %></small>
+                    <% if(locals.user && locals.user.id == comment.user.id){ %>
+                        <a class = "delete-comment" href="/comments/destroy/<%= comment.id %>"><i class="fas fa-trash-alt"></i></a>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="comment_body">
+                <div class="comment_content col-lg-10 col-md-12">
+                    <b><%= comment.content %></b>
+                </div>
+                <div class="comment_likes_container">
+                    <span class = "likes_count"><%= comment.likes.length %> </span>    
+                    <% if(locals.user){ %> 
+                        <a href = "/likes/toggle?id=<%=comment.id%>&type=Comment" class = "toggle_like"><i class="far fa-thumbs-up"></i> </a>
+                    <% }else{ %>
+                        <i class="far fa-thumbs-up"></i> 
+                    <% } %>
+                </div>
+            </div>
         </li>
     <% } %>
     </ul>
