@@ -88,7 +88,7 @@
                     console.log(err.responseText);
                     new Noty({
                         theme: 'relax',
-                        text: data.message,
+                        text: "POST NOT DELETED",
                         type: 'error',
                         layout: 'topRight',
                         timeout: 1500
