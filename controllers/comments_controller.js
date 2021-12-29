@@ -83,6 +83,12 @@ module.exports.destroy = async (req, res) => {
         req.flash('success', 'Comment Successfully Deleted');
         return res.redirect('/');
     }catch(err){
+        if(req.xhr){
+            return res.status(400).json({
+                message: "COMMENT NOT DELETED"
+            })
+        }
+        req.flash('error', 'Comment Not Deleted');
         console.log(err);
         return res.redirect('/');
     }

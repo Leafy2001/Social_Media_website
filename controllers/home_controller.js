@@ -29,6 +29,7 @@ module.exports.home = async function(req, res){
             all_users: users
         });
     }catch(err){
+        req.flash('error', "SERVER ERROR");
         console.log(err);
         return;
     }

@@ -18,8 +18,15 @@ module.exports.create = async (req, res) => {
                 message: "POST CREATED"
             });
         }
+        req.flash('success', "POST CREATED");
     }catch(err){
         console.log(err);
+        if(req.xhr){
+            return res.status(400).json({
+                message: "POST NOT CREATED"
+            });
+        }
+        req.flash('error', "POST NOT CREATED");
         return res.redirect('/');
     }
 };
@@ -60,6 +67,12 @@ module.exports.destroy = async (req, res) => {
         return res.redirect('/');
     }catch(err){
         console.log(err);
+        if(req.xhr){
+            return res.status(400).json({
+                message: "POST NOT DELETED"
+            });
+        }
+        req.flash('error', 'Post Not Deleted');
         return res.redirect('/');
     }
 };
