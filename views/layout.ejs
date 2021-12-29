@@ -28,7 +28,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
-    <body>
+    <body onload="display_loader()">
+            <div id="loader-div">
+                <img src="/images/loader.gif">
+            </div>
             <%- include('_header'); %>
 
             <%- body %>
@@ -54,6 +57,13 @@
                 }).show();
         </script>
         <% } %>
-
+        <script>
+            {
+                function display_loader(){
+                    let pre_loader = document.getElementById("loader-div");
+                    pre_loader.style.visibility = 'hidden'
+                }
+            }
+        </script>
     </body>
 </html>

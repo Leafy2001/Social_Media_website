@@ -8,6 +8,9 @@
                 type: 'post',
                 url: '/comments/create',
                 data: $(comment_form).serialize(),
+                beforeSend: () => {
+                    $('#loader-div').css("visibility", "visible");
+                },
                 success: (data) => {
                     let post_id = data.data.comment.post;
                     let dom = comment_dom(data);
@@ -24,7 +27,7 @@
                         layout: 'topRight',
                         timeout: 1500
                     }).show();
-                }, 
+                },
                 error: (err) => {
                     // console.log(err.responseText);
                     new Noty({
@@ -34,6 +37,9 @@
                         layout: 'topRight',
                         timeout: 1500
                     }).show();
+                },
+                complete: () => {
+                    $('#loader-div').css("visibility", "hidden");
                 }
             })
         })
@@ -97,6 +103,9 @@
             $.ajax({
                 type: 'get',
                 url: $(link).prop('href'),
+                beforeSend: () => {
+                    $('#loader-div').css("visibility", "visible");
+                },
                 success: (data) => {
                     let comment_id = data.data.comment_id;
                     $(`#comment-${comment_id}`).remove();
@@ -117,6 +126,9 @@
                         layout: 'topRight',
                         timeout: 1500
                     }).show();
+                },
+                complete: () => {
+                    $('#loader-div').css("visibility", "hidden");
                 }
             })
         })

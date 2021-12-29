@@ -4,8 +4,24 @@ body{
     background-color: #efefef;
 }
 
+#loader-div{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    opacity: 0.5;
+    /* visibility: hidden; */
+}
+
 .main{
     margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
 .navbar{

@@ -15,6 +15,9 @@
             $.ajax({
                 type: 'POST',
                 url: $(link).prop('href'),
+                beforeSend: () => {
+                    $('#loader-div').css("visibility", "visible");
+                },
                 success: (data) => {
                     // console.log(data);
 
@@ -59,6 +62,9 @@
                         layout: 'topRight',
                         timeout: 1500
                     }).show();
+                },
+                complete: () => {
+                    $('#loader-div').css("visibility", "hidden");
                 }
             });
         });

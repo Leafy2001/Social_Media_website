@@ -9,6 +9,9 @@
                 type: 'post',
                 url: '/posts/create',
                 data: form.serialize(),
+                beforeSend: () => {
+                    $('#loader-div').css("visibility", "visible");
+                },
                 success: (data) => {
                     let post = data.data.post;
                     let post_id = post._id;
@@ -42,6 +45,9 @@
                         layout: 'topRight',
                         timeout: 1500
                     }).show();
+                },
+                complete: () => {
+                    $('#loader-div').css("visibility", "hidden");
                 }
             })
         });
@@ -114,6 +120,9 @@
             $.ajax({
                 type: 'get',
                 url: $(delLink).prop('href'),
+                beforeSend: () => {
+                    $('#loader-div').css("visibility", "visible");
+                },
                 success: (data) => {
                     let post_id = data.data.post_id;
                     $(`#post-${post_id}`).remove();
@@ -135,6 +144,9 @@
                         layout: 'topRight',
                         timeout: 1500
                     }).show();
+                },
+                complete: () => {
+                    $('#loader-div').css("visibility", "hidden");
                 }
             })
         })
