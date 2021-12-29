@@ -1,3 +1,0 @@
-Username: "shashank_1234"
-Password: "dellinspiron"
-URL: "mongodb+srv://shashank_1234:<password>@cluster0.qmcyz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
