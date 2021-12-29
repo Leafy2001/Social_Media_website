@@ -6,7 +6,7 @@ const app = express();
 // const port = 8000;
 
 // Prodution
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
