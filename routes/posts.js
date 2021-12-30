@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
+const path = require('path');
+
 // MULTER POST IMAGE CONFIGURATION
 const multer = require('multer');
 
+const POST_PATH = '/uploads/users/posts';
+const __path_post = path.join(__dirname, '..', POST_PATH);
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads/users/posts');
+      cb(null, __path_post);
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)

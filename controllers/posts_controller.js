@@ -16,7 +16,8 @@ module.exports.create = async (req, res) => {
         */
         let file_path;
         if(req.file){
-            file_path = req.file.path;
+            file_path = path.join('/uploads/users/posts/', req.file.filename);
+            // console.log(req.file);
         }
         let post = await Post.create({
             content: req.body.content,

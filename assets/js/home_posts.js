@@ -16,7 +16,7 @@
                     $('#loader-div').css("visibility", "visible");
                 },
                 success: (data) => {
-                    console.log(data.data);
+                    // console.log(data.data);
                     let post = data.data.post;
                     let post_id = post._id;
                     
