@@ -19,6 +19,9 @@
             <div class="post_body col-lg-10 col-md-12">
                 <div class="post_content">
                     <p><%= post.content %></p>
+                    <% if(post.pic){ %>
+                        <img src = "<%= post.pic %>" width="300px"/>
+                    <% } %>
                 </div>
                 <div class="likes_container">
                     <span class = "likes_count"><%= post.likes.length %> </span>    

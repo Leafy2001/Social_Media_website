@@ -1,10 +1,12 @@
 {
     function create_post(){
         let form = $('#new-post-form');
+        // return;
         
         form.submit((e) => {
             e.preventDefault();
-
+            console.log(form.serialize());
+            console.log(new FormData( this ));
             $.ajax({
                 type: 'post',
                 url: '/posts/create',

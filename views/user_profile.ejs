@@ -49,12 +49,6 @@
                             <% } %>
                         </div>
                         <% if(locals.user && locals.user.id === locals.curr_user.id){ %>
-                            <!-- <h2>Update Details</h2>
-                            <form action="/users/update" method="post" enctype="multipart/form-data">
-                                <input type="text" name = "name" value = "<%= locals.user.name %>"/>
-                                <input type="file" name="avatar" placeholder="Add profile picture">
-                                <button type="submit">Update</button>
-                            </form> -->
                             <div class="update">
                                 <h3>Update Details</h3>
                                 <form action="/users/update" method="post" enctype="multipart/form-data">
@@ -62,10 +56,6 @@
                                         <label for="exampleInputName" class="form-label">Name</label>
                                         <input type="text" class="form-control" id="exampleInputName" name = "name" value = "<%= locals.user.name %>">
                                     </div>
-                                    <!-- <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                    </div> -->
                                     <div class="mb-3">
                                         <label for="exampleInputImage" class="form-label">Profile Picture</label>
                                         <input type="file" class="form-control" id="exampleInputImage" name = "avatar">

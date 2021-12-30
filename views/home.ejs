@@ -2,10 +2,14 @@
     <div class="row justify-content-center">
         <div id="feed-posts" class="col-lg-7 col-md-8 col-sm-12 col-xs-12 posts">
             <% if(locals.user) { %>
-            <form action = "/posts/create" id = "new-post-form" method = "post">
+            <form action = "/posts/create" id = "new-post-form" method = "post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label"><h4>Hi ! <%= user.name %> </h4></label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="content" placeholder="Whats on your mind ?..."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputImage" class="form-label">Add image</label>
+                    <input type="file" class="form-control" id="exampleInputImage" name = "post_pic">
                 </div>
                 <button type="submit" class="btn btn-primary post_button">POST</button>
             </form>

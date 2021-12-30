@@ -5,9 +5,11 @@ const Like = require('../models/like');
 
 module.exports.create = async (req, res) => {
     try{
+        // console.log(req.file);
         let post = await Post.create({
             content: req.body.content,
-            user: req.user.id
+            user: req.user.id,
+            pic: req.file.path
         });
         
         let user = await User.findById(req.user.id).select('name avatar');
@@ -15,12 +17,14 @@ module.exports.create = async (req, res) => {
             return res.status(200).json({
                 data: {
                     post: post,
-                    user: user
+                    user: user,
+                    picture: req.file.path
                 },
                 message: "POST CREATED"
             });
         }
         req.flash('success', "POST CREATED");
+        return res.redirect('/');
     }catch(err){
         console.log(err);
         if(req.xhr){

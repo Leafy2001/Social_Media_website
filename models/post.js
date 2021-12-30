@@ -23,7 +23,11 @@ const postSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Like'
         }
-    ]
+    ],
+    pic: {
+        type: String,
+        required: false
+    }
 }, {timestamps: true});
 
 const Post = mongoose.model('Post', postSchema);
