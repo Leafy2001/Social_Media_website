@@ -3,18 +3,20 @@
         let form = $('#new-post-form');
         // return;
         
-        form.submit((e) => {
+        form.submit(function(e){
             e.preventDefault();
-            console.log(form.serialize());
-            console.log(new FormData( this ));
+            let formData = new FormData(this);
             $.ajax({
                 type: 'post',
                 url: '/posts/create',
-                data: form.serialize(),
+                data: formData,
+                processData: false,
+                contentType: false,
                 beforeSend: () => {
                     $('#loader-div').css("visibility", "visible");
                 },
                 success: (data) => {
+                    console.log(data.data);
                     let post = data.data.post;
                     let post_id = post._id;
                     
@@ -68,7 +70,7 @@
         let user_avatar = user.avatar;
         let user_name = user.name;
         
-        let dom2 = $(`
+        let upper = `
                     <li id = "post-${post_id}" class="list-group-item single_post">
                     <div class="post_heading">
                         <div class="profile-pic">
@@ -82,7 +84,15 @@
                     </div>
                     <div class="post_body">
                         <div class="post_content col-lg-10 col-md-12">
-                            <b>${post_content}</b>
+                            <p>${post_content}</p>                        
+        `;
+
+        let middle;
+        if(data.data.pic){
+            middle = `<img src = "${data.data.pic}" width = "300px">`;
+        }
+
+        let lower = `
                         </div>
                         <div class="likes_container">
                             <span class = "likes_count">0 </span>
@@ -106,9 +116,12 @@
                         </div>
                     </div>
                 </li>
-        `);
-
-        return dom2;
+        `;
+        if(middle){
+            upper = upper + middle
+        }
+        let dom = upper + lower;
+        return $(dom);
     }
 
     create_post();

@@ -2,14 +2,26 @@ const User = require('../models/user');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 const Like = require('../models/like');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.create = async (req, res) => {
     try{
+        // console.log(req.body, req.file);
         // console.log(req.file);
+        /*
+            if(user.avatar && fs.existsSync(path.join(__dirname, '..', user.avatar))){
+                fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+            }
+        */
+        let file_path;
+        if(req.file){
+            file_path = req.file.path;
+        }
         let post = await Post.create({
             content: req.body.content,
             user: req.user.id,
-            pic: req.file.path
+            pic: file_path
         });
         
         let user = await User.findById(req.user.id).select('name avatar');
@@ -18,7 +30,7 @@ module.exports.create = async (req, res) => {
                 data: {
                     post: post,
                     user: user,
-                    picture: req.file.path
+                    pic: file_path
                 },
                 message: "POST CREATED"
             });
@@ -56,6 +68,10 @@ module.exports.destroy = async (req, res) => {
             for(like_id of comment.likes){
                 await Like.deleteOne({_id: like_id});
             }
+        }
+
+        if(post.pic && fs.existsSync(path.join(__dirname, '..', post.pic))){
+            fs.unlinkSync(path.join(__dirname, '..', post.pic));
         }
 
         await post.remove();
