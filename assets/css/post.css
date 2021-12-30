@@ -59,6 +59,8 @@
     background-color: #eff5f8;
     text-align: justify;
     margin-bottom: 10px;
+    word-wrap: break-word;
+    font-weight: 500;
 }
 
 .likes_container{

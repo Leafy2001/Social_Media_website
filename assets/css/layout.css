@@ -19,6 +19,10 @@ body{
     /* visibility: hidden; */
 }
 
+header{
+    font-weight: 800;
+}
+
 .main{
     margin-top: 5vh;
     margin-bottom: 5vh;
