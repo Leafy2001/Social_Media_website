@@ -46,6 +46,8 @@
     text-align: justify;
     margin-bottom: 8px;
     font-size: 0.9rem;
+    word-wrap: break-word;
+    font-weight: 500;
 }
 
 .comment_likes_container{
