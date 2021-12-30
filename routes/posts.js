@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const path = require('path');
+const passport = require('passport');
+
+const usersConrtoller = require('../controllers/users_controller');
+const postsController = require('../controllers/posts_controller');
+
 
 // MULTER POST IMAGE CONFIGURATION
 const multer = require('multer');
@@ -20,14 +25,9 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage: storage});
+router.post('/create', passport.checkAuthentication, upload.single('post_pic'), postsController.create);
 // ***********************************
 
-const passport = require('passport');
-
-const usersConrtoller = require('../controllers/users_controller');
-const postsController = require('../controllers/posts_controller');
-
-router.post('/create', passport.checkAuthentication, upload.single('post_pic'), postsController.create);
 router.get('/destroy/:post_id', passport.checkAuthentication, postsController.destroy);
 
 
