@@ -16,7 +16,7 @@ const MongoStore = require('connect-mongo');
 
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-const passportGoogle = require('./config/passport-google-oauth2-strategy');
+// const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
 const flash = require('connect-flash');
 const customMiddleware = require('./config/middleware');
