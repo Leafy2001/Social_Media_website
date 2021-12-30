@@ -1,7 +1,19 @@
 const mongoose = require('mongoose');
 
 // mongoose.connect('mongodb://localhost/codeial_development');
-mongoose.connect('mongodb+srv://shashank_1234:dellinspiron@cluster0.qmcyz.mongodb.net/myFirstDatabase?authSource=admin&retryWrites=true&w=majority', 
+// mongoose.connect('mongodb+srv://shashank_1234:dellinspiron@cluster0.qmcyz.mongodb.net/myFirstDatabase?authSource=admin&retryWrites=true&w=majority', 
+// {
+//     useUnifiedTopology: true,
+//     useNewUrlParser: true,
+//     useCreateIndex: true
+//  }).then(() => {
+//     console.log("Connected to Database");
+//     }).catch((err) => {
+//         console.log("Not Connected to Database ERROR! ", err);
+//     }
+// );
+
+mongoose.connect(process.env.MONGODB_URI, 
 {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -10,8 +22,8 @@ mongoose.connect('mongodb+srv://shashank_1234:dellinspiron@cluster0.qmcyz.mongod
     console.log("Connected to Database");
     }).catch((err) => {
         console.log("Not Connected to Database ERROR! ", err);
-    });
-    
+    }
+);
 // mongoose.connect(process.env.MONGODB_URI)
 
 const db = mongoose.connection;
