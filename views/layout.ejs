@@ -30,6 +30,9 @@
     </head>
 
     <body onload="display_loader()">
+            <div id="site-loader">
+                <img src = "/images/1474.gif">
+            </div>
             <div id="loader-div">
                 <img src="/images/loader.gif">
             </div>
@@ -61,8 +64,8 @@
         <script>
             {
                 function display_loader(){
-                    let pre_loader = document.getElementById("loader-div");
-                    pre_loader.style.visibility = 'hidden'
+                    let site_loader = document.getElementById("site-loader");
+                    site_loader.style.visibility = 'hidden'
                 }
             }
         </script>
