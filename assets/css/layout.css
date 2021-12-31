@@ -12,7 +12,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 5;
+    z-index: 3;
 }
 
 #loader-div{
@@ -28,6 +28,33 @@ body{
     background-color: white;
     opacity: 0.5;
     visibility: hidden;
+}
+
+#magnify-image{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 4;
+    font-size: 3rem;
+    color: red;
+    display: none;
+}
+
+#magnify-image i{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+
+#magnify-image img{
+    max-width: 90vw;
+    max-height: 90vh;
+    border: 5px solid lightskyblue;
+    border-radius: 30px;
 }
 
 header{

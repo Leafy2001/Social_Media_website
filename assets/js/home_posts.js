@@ -32,6 +32,10 @@
                     let like_btn = $(' .toggle_like', dom);
                     attach(like_btn);
 
+                    if(data.data.pic){
+                        attach_listener($(' .post-pic', dom));
+                    }
+
                     new Noty({
                         theme: 'relax',
                         text: data.message,
@@ -89,7 +93,9 @@
 
         let middle;
         if(data.data.pic){
-            middle = `<img src = "${data.data.pic}" width = "300px">`;
+            middle = `
+                <img class="post-pic" src = "${data.data.pic}">
+            `;
         }
 
         let lower = `

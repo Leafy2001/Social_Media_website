@@ -8,10 +8,7 @@
 .post_button{
     font-size: 2rem;
 }
-.post_button:hover{
-    animation: rubberBand;
-    animation-duration: 1s;
-}
+
 .single_post{
     padding-bottom: 3vh;
     padding-top: 3vh;
@@ -61,6 +58,10 @@
     margin-bottom: 10px;
     word-wrap: break-word;
     font-weight: 500;
+}
+.post-pic{
+    min-width: 150px;
+    max-width: 400px;
 }
 
 .likes_container{
