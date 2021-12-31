@@ -2,17 +2,31 @@ const User = require('../models/user');
 const path = require('path');
 const fs = require('fs');
 
-module.exports.profile = function(req, res){
-    let user_id = req.params.id;
-    User.findById(user_id, (err, user) => {
-        if(err){
-            console.log(err);
+module.exports.profile = async function(req, res){
+    try{
+        let user_id = req.params.id;
+
+        let profile_user = await User.findById(user_id);
+        if(!profile_user){
+            console.log("PROFILE USER NOT FOUND");
+            return res.redirec('/');
         }
+        
+        let user = await User.findById(req.user.id);
+
+        let is_f = true;
+        let index = user.following.indexOf(profile_user._id);
+        if(index == -1){is_f = false;}
+
         return res.render('user_profile', {
-            title: "Profile | " + user.name,
-            curr_user: user
+            title: "Profile | " + profile_user.name,
+            curr_user: profile_user,
+            following : is_f
         });
-    });
+    }catch(err){
+        console.log(err);
+        return res.redirec('/');
+    }
 };
 
 
@@ -112,3 +126,26 @@ module.exports.update = async (req, res) => {
         return res.redirect('/');
     }
 };
+
+module.exports.follow = async function (req, res) {
+    let follow_id = req.params.id;
+    let follow_user = await User.findById(follow_id);
+    if(!follow_user){
+        console.log("WRONG FOLLOW ID");
+        return res.redirect('back');
+    }
+
+    let user = await User.findById(req.user.id);
+    let index = user.following.indexOf(follow_id);
+    
+    if(index == -1){
+        user.following.push(follow_id);
+        // console.log("Followed ID: ", follow_id);
+    }else{
+        user.following.splice(index, 1);
+        // console.log("Unfollowed ID: ", follow_id);
+    }
+
+    await user.save();
+    return res.redirect('back');
+}

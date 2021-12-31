@@ -1,24 +1,4 @@
         <link rel="stylesheet" href="/css/user_profile.css">
-        <!-- <h1>
-            Codeial / Profile Page
-        </h1>
-        <br>
-        <br>
-        <br>
-        <b><%= locals.curr_user.email %></b><br>
-        <b><%= locals.curr_user.name %></b><br><br>
-        <% if(locals.curr_user.avatar){ %>
-            <img src = "<%= locals.curr_user.avatar %>" width="200px"/>
-        <% } %>
-        <% if(locals.user && locals.user.id === locals.curr_user.id){ %>
-        <h2>Update Details</h2>
-        <form action="/users/update" method="post" enctype="multipart/form-data">
-            <input type="text" name = "name" value = "<%= locals.user.name %>"/>
-            <input type="email" name = "email" value = "<%= locals.user.email %>"/>
-            <input type="file" name="avatar" placeholder="Add profile picture">
-            <button type="submit">Update</button>
-        </form>
-        <% } %> -->
 
         <div class="container mt-5 details">
             <div class="row d-flex justify-content-center">
@@ -43,8 +23,14 @@
                             </ul>
                             <% if(locals.user && locals.user.id !== locals.curr_user.id){ %>
                             <div class="buttons"> 
-                                <!-- <button class="btn btn-outline-primary px-4">Message</button>  -->
-                                <button class="btn btn-primary px-4 ms-3">Follow</button> 
+                                
+                                <a class="btn btn-primary px-4 ms-3" href = "/users/follow/<%= locals.curr_user.id %>">
+                                    <% if(locals.following){ %>
+                                        Unfollow
+                                    <% }else{ %>
+                                        Follow
+                                    <% } %>
+                                </a> 
                             </div>
                             <% } %>
                         </div>

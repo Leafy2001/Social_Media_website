@@ -21,7 +21,7 @@ const passportGoogle = require('./config/passport-google-oauth2-strategy');
 const flash = require('connect-flash');
 const customMiddleware = require('./config/middleware');
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 app.use(cookieParser()); 
 
 app.use(express.static('./assets'));
@@ -45,8 +45,8 @@ app.use(session({
         maxAge: (1000*60*100)
     },
     store: MongoStore.create({
-        // mongoUrl: 'mongodb://localhost/codeial_development',
-        mongoUrl: 'mongodb+srv://shashank_1234:dellinspiron@cluster0.qmcyz.mongodb.net/myFirstDatabase?authSource=admin&retryWrites=true&w=majority',
+        mongoUrl: 'mongodb://localhost/codeial_development',
+        // mongoUrl: 'mongodb+srv://shashank_1234:dellinspiron@cluster0.qmcyz.mongodb.net/myFirstDatabase?authSource=admin&retryWrites=true&w=majority',
         autoRemove: 'disabled'
     })
 }));

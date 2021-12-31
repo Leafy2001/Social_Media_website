@@ -12,7 +12,7 @@ router.get('/signin', usersConrtoller.signIn);
 router.get('/signup', usersConrtoller.signUp);
 router.get('/sign-out', usersConrtoller.signout);
 
-
+router.get('/follow/:id', passport.checkAuthentication, usersConrtoller.follow);
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 router.get('/auth/google/callback', passport.authenticate(
     'google', 
@@ -37,6 +37,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 router.post('/update', passport.checkAuthentication,  upload.single('avatar'), usersConrtoller.update)
 // MULTER END
+
 
 router.post('/create', usersConrtoller.create);
 router.post('/createSession', 
