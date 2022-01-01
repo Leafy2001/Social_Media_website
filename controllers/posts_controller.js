@@ -14,7 +14,7 @@ module.exports.create = async (req, res) => {
         let file_path;
         if(req.file){
             file_path = path.join('/uploads/users/posts', '/' , req.file.filename);
-            local_path = file_path;
+            let local_path = file_path;
             file_path = await uploader(path.join(__dirname, '..', file_path));
             fs.unlinkSync(path.join(__dirname, '..', local_path));
         }
