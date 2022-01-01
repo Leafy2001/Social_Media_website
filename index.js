@@ -2,10 +2,6 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
 
-// Development
-// const port = 8000;
-
-// Prodution
 const port = process.env.PORT || 8000;
 
 const expressLayouts = require('express-ejs-layouts');

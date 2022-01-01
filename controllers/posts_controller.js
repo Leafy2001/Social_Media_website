@@ -4,25 +4,26 @@ const Comment = require('../models/comment');
 const Like = require('../models/like');
 const fs = require('fs');
 const path = require('path');
+const cloudinary = require('../config/cloudinary_config');
 
 module.exports.create = async (req, res) => {
     try{
-        // console.log(req.body, req.file);
-        // console.log(req.file);
-        /*
-            if(user.avatar && fs.existsSync(path.join(__dirname, '..', user.avatar))){
-                fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-            }
-        */
+        
+        const uploader = async (path) => await cloudinary.uploads(path, 'Post_Images');
+
         let file_path;
         if(req.file){
             file_path = path.join('/uploads/users/posts', '/' , req.file.filename);
+            local_path = file_path;
+            file_path = await uploader(path.join(__dirname, '..', file_path));
             // console.log(file_path);
+            fs.unlinkSync(path.join(__dirname, '..', local_path));
         }
+
         let post = await Post.create({
             content: req.body.content,
             user: req.user.id,
-            pic: file_path
+            pic: file_path.url
         });
         
         let user = await User.findById(req.user.id).select('name avatar');
@@ -31,7 +32,7 @@ module.exports.create = async (req, res) => {
                 data: {
                     post: post,
                     user: user,
-                    pic: file_path
+                    pic: file_path.url
                 },
                 message: "POST CREATED"
             });

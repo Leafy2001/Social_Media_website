@@ -24,7 +24,23 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({storage: storage});
+const fileFilter = (req, file, cb) => {
+      if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+          cb(null, true);
+      }else{
+        cb({
+          message: "Unsupported File Format"
+        }, false);
+      }
+}
+
+const upload = multer(
+  {
+    storage: storage,
+    limits: {fileSize: 1024*1024},
+    fileFilter: fileFilter
+  }
+);
 router.post('/create', passport.checkAuthentication, upload.single('post_pic'), postsController.create);
 // ***********************************
 
