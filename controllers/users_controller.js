@@ -2,6 +2,11 @@ const User = require('../models/user');
 const path = require('path');
 const fs = require('fs');
 
+const cloudinary_config = require('../config/cloudinary_config');
+const cloudinary = require('cloudinary');
+
+const uploader = async (path) => await cloudinary_config.uploads(path, 'User_Images');
+
 module.exports.profile = async function(req, res){
     try{
         let user_id = req.params.id;
@@ -111,11 +116,17 @@ module.exports.update = async (req, res) => {
             user.name = req.body.name;
         }
         if(req.file){
-            // console.log(req.file);
-            if(user.avatar && fs.existsSync(path.join(__dirname, '..', user.avatar))){
-                fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+            file_path = path.join('/uploads/users/avatars', '/' , req.file.filename);
+            let local_path = file_path;
+            file_path = await uploader(path.join(__dirname, '..', file_path));
+            fs.unlinkSync(path.join(__dirname, '..', local_path));
+
+            if(user.avatar && user.avatar_public_id){
+                // DELETE FILE
+                await cloudinary.uploader.destroy(user.avatar_public_id);
             }
-            user.avatar = path.join(AVATAR_PATH, '/', req.file.filename)
+            user.avatar = file_path.url;
+            user.avatar_public_id = file_path.id;
         }
         user.save();
 
