@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="/css/top_contributors.css">
+
+<div class="container intro">
+  <div class="jumbotron">
+      <h1 class="display-3"><b><i class="fas fa-crown"></i> Contribution Heroes</b></h1>
+      <p class="lead">Contribute memes, funny comments and see yourself rise through the ranks</p>
+      <hr class="my-4">
+      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+      <p class="lead">
+        <a class="btn btn-info btn-lg" href="#" role="button">Learn more</a>
+      </p>
+  </div>
+</div>
+
+<div class="users-list container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Score</th>
+        <th scope="col">Follow</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" class="rank"><i class="fas fa-medal"></i></th>
+        <td>
+          <img src = "/uploads/users/avatars/default.png" class="profile-pic">
+          Mark
+        </td>
+        <td class="score">1900</td>
+        <td><button type="button" class="btn btn-primary">Follow</button></td>
+      </tr>
+
+      <tr>
+        <th scope="row" class="rank"><i class="fas fa-medal"></i></th>
+        <td>
+          <img src = "/uploads/users/avatars/default.png" class="profile-pic">
+          Jacob
+        </td>
+        <td class="score">1100</td>
+        <td><button type="button" class="btn btn-warning">Unfollow</button></td>
+      </tr>
+
+      <tr>
+        <th scope="row" class="rank"><i class="fas fa-medal"></i></th>
+        <td>
+          <img src = "/uploads/users/avatars/default.png" class="profile-pic">
+          Shashank Parmar
+        </td>
+        <td class="score">500</td>
+        <td><button type="button" class="btn btn-primary">Follow</button></td>
+      </tr>
+      <% for(let i = 4; i < 15; i++){ %>
+      <tr>
+        <th scope="row" class="rank"><%= i %></th>
+        <td><img src = "/uploads/users/avatars/default.png" class="profile-pic"> Shashank Parmar</td>
+        <td class="score">500</td>
+        <td><button type="button" class="btn btn-primary">Follow</button></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

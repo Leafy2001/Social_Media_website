@@ -151,12 +151,21 @@ module.exports.follow = async function (req, res) {
     
     if(index == -1){
         user.following.push(follow_id);
-        // console.log("Followed ID: ", follow_id);
     }else{
         user.following.splice(index, 1);
-        // console.log("Unfollowed ID: ", follow_id);
     }
 
     await user.save();
     return res.redirect('back');
+}
+
+module.exports.top_contributors = async function(req, res){
+    try{
+        return res.render('top_contributors', {
+            title: 'Codeial | Top Contributors'
+        });
+    }catch(err){
+        console.log(err);
+        return res.redirec('/');
+    }
 }

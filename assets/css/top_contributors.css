@@ -1,0 +1,40 @@
+
+.intro{
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.table{
+    width: 95%;
+    padding: 10px 20px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    margin-bottom: 10vh;
+}
+
+.profile-pic{
+    width: 5vw;
+}
+.rank{
+    font-size: 1.5rem;
+
+}
+
+tbody tr:nth-child(1) .rank{
+    color: gold;
+}
+tbody tr:nth-child(2) .rank{
+    color: silver;
+}
+tbody tr:nth-child(3) .rank{
+    color: brown;
+}
+
+tbody tr:nth-child(-n+3) .score{
+    font-weight: 700;
+}
