@@ -4,26 +4,25 @@ const Comment = require('../models/comment');
 const Like = require('../models/like');
 const fs = require('fs');
 const path = require('path');
-const cloudinary = require('../config/cloudinary_config');
+const cloudinary_config = require('../config/cloudinary_config');
+const cloudinary = require('cloudinary');
+
+const uploader = async (path) => await cloudinary_config.uploads(path, 'Post_Images');
 
 module.exports.create = async (req, res) => {
     try{
-        
-        const uploader = async (path) => await cloudinary.uploads(path, 'Post_Images');
-
         let file_path;
         if(req.file){
             file_path = path.join('/uploads/users/posts', '/' , req.file.filename);
             local_path = file_path;
             file_path = await uploader(path.join(__dirname, '..', file_path));
-            // console.log(file_path);
             fs.unlinkSync(path.join(__dirname, '..', local_path));
         }
 
         let post = await Post.create({
             content: req.body.content,
             user: req.user.id,
-            pic: file_path.url
+            pic: JSON.stringify(file_path)
         });
         
         let user = await User.findById(req.user.id).select('name avatar');
@@ -72,8 +71,9 @@ module.exports.destroy = async (req, res) => {
             }
         }
 
-        if(post.pic && fs.existsSync(path.join(__dirname, '..', post.pic))){
-            fs.unlinkSync(path.join(__dirname, '..', post.pic));
+        if(post.pic){
+            let fp = JSON.parse(post.pic);
+            await cloudinary.uploader.destroy(fp.id);
         }
 
         await post.remove();

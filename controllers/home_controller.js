@@ -21,13 +21,18 @@ module.exports.home = async function(req, res){
                     select: 'name avatar'
                 }
             });
-
+            posts.forEach((post) => {
+                if(post.pic){
+                    let PIC = JSON.parse(post.pic);
+                    post.pic = PIC.url;
+                }
+            });
             let users = await User.find({});
 
             return res.render('home.ejs', {
-            title: 'Codeial | Home',
-            posts: posts,
-            all_users: users
+                title: 'Codeial | Home',
+                posts: posts,
+                all_users: users
             });
         }
         let user = await User.findById(req.user.id);
@@ -59,7 +64,12 @@ module.exports.home = async function(req, res){
                         });
         
         let users = await User.find({});
-
+        posts.forEach((post) => {
+            if(post.pic){
+                let PIC = JSON.parse(post.pic);
+                post.pic = PIC.url;
+            }
+        });
         return res.render('home.ejs', {
             title: 'Codeial | Home',
             posts: posts,
