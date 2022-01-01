@@ -25,13 +25,17 @@ module.exports.create = async (req, res) => {
             pic: JSON.stringify(file_path)
         });
         
+        let send;
+        if(file_path){
+            send = file_path.url
+        }
         let user = await User.findById(req.user.id).select('name avatar');
         if(req.xhr){
             return res.status(200).json({
                 data: {
                     post: post,
                     user: user,
-                    pic: file_path.url
+                    pic: send
                 },
                 message: "POST CREATED"
             });
