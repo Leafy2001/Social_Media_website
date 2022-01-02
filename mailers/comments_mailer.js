@@ -8,7 +8,7 @@ exports.newComment = (comment) => {
     );
 
     nodemailer.transporter.sendMail({
-        from: "onlineclassesse113@gmail.com",
+        from: process.env.USER_EMAIL,
         to: comment.user.email,
         subject: "Comment Successfully Added",
         html: htmlString
