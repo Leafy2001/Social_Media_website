@@ -1,6 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
+require('dotenv').config();
 
 const port = process.env.PORT || 8000;
 
@@ -42,7 +43,7 @@ app.use(session({
     },
     store: MongoStore.create({
         // mongoUrl: 'mongodb://localhost/codeial_development',
-        mongoUrl: 'mongodb+srv://shashank_1234:dellinspiron@cluster0.qmcyz.mongodb.net/myFirstDatabase?authSource=admin&retryWrites=true&w=majority',
+        mongoUrl: process.env.MONGODB_URL,
         autoRemove: 'disabled'
     })
 }));

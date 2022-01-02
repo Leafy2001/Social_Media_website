@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 //     }
 // );
 
-mongoose.connect('mongodb+srv://shashank_1234:dellinspiron@cluster0.qmcyz.mongodb.net/myFirstDatabase?authSource=admin&retryWrites=true&w=majority', 
+mongoose.connect(process.env.MONGODB_URL, 
 {
     useUnifiedTopology: true,
     useNewUrlParser: true,

@@ -4,10 +4,10 @@ const crypto = require('crypto');
 const User = require('../models/user');
 
 passport.use(new googleStrategy({
-    clientID: "598741569104-0n0fjkt10fp69sqdhfpve210a6rmhfdb.apps.googleusercontent.com",
-    clientSecret: "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",
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     // callbackURL: "http://localhost:8000/users/auth/google/callback"
-    callbackURL: "https://meme-coding.herokuapp.com/users/auth/google/callback"
+    callbackURL: process.env.GOOGLE_CALL_BACK_URL
 }, function(accessToken, refreshToken, profile, done) {
     User.findOne({
         email: profile.emails[0].value
