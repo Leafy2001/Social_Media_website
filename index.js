@@ -42,7 +42,6 @@ app.use(session({
         maxAge: (1000*60*100)
     },
     store: MongoStore.create({
-        // mongoUrl: 'mongodb://localhost/codeial_development',
         mongoUrl: process.env.MONGODB_URL,
         autoRemove: 'disabled'
     })
